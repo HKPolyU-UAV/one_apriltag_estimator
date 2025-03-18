@@ -9,7 +9,6 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import CompressedImage, Image
 from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import Path
-from tf.transformations import quaternion_multiply, quaternion_from_euler
 
 class AprilTagPoseEstimator:
     def __init__(self, camera_matrix, dist_coeffs, tag_size, target_id):
@@ -80,9 +79,11 @@ class AprilTagPoseEstimator:
             pose_msg = PoseStamped()
             pose_msg.header.stamp = self.image_timestamp if self.image_timestamp else rospy.Time.now()
             pose_msg.header.frame_id = "map"
+            
             # pose_msg.pose.position.x = tvec[0]
             # pose_msg.pose.position.y = tvec[1]
             # pose_msg.pose.position.z = tvec[2]
+            
             pose_msg.pose.position.x = tvec[0] - self.initial_offset_x
             pose_msg.pose.position.y = tvec[1] - self.initial_offset_y
             pose_msg.pose.position.z = tvec[2] - self.initial_offset_z
