@@ -116,8 +116,7 @@ if __name__ == '__main__':
     ], dtype=np.float32)
     dist_coeffs = np.array([-0.0033, 0.0129, 2.5278e-04, 0.0013], dtype=np.float32)
     tag_size = 0.3
-    target_id = 3 # For the experiments of the CASIA dataset
-    # target_id = 0 # For the experiments at PolyUPool
+    target_id = 0 # For the experiments at PolyUPool
 
     estimator = AprilTagPoseEstimator(camera_matrix, dist_coeffs, tag_size, target_id)
     rospy.spin()
